@@ -40,15 +40,20 @@ def transfer_data(source: str, dest: str, num_row: int):
     dest: str - имя файла куда переносим
     num_row: int - номер переносимой строки
     """
-    with open(source, "r", encoding="utf-8") as file:   # Открываем для чтения исходный файл
-        list_1 = file.read().split("\n")                # Содержимое исходного файла построчно записываем в список list_1
-    if len(list_1) < num_row:                           # Проверка на наличие искомой строки
-        print('Такой строки не существует')             
+# Открываем для чтения исходный файл
+    with open(source, "r", encoding="utf-8") as file:
+        # Содержимое исходного файла построчно записываем в список list_1
+        list_1 = file.read().split("\n")
+# Проверка на наличие искомой строки
+    if len(list_1) < num_row:
+        print('Такой строки не существует')
         return
-    with open(dest, "a", encoding="utf-8") as file:     # Открываем/создаем файл для перезаписи
-        new_line = '\n' if read_all(dest) != "" else ''  # Проверка на наличие содержимого в файле для перезаписи
-        file.write(f'{new_line}{list_1[num_row-1]}')    # Записываем искомую строку в файл для перезаписи
-
+# Открываем/создаем файл для перезаписи
+    with open(dest, "a", encoding="utf-8") as file:
+        # Проверка на наличие содержимого в файле для перезаписи
+        new_line = '\n' if read_all(dest) != "" else ''
+# Записываем искомую строку в файл для перезаписи
+        file.write(f'{new_line}{list_1[num_row-1]}')
 
 
 INFO_STRING = """
@@ -79,7 +84,7 @@ while True:
         print(search_user(file, data))
     elif mode == 4:
         new_file = input("Введите имя файла для перезаписываемых данных: ")
-        print("Введите номер строки которую нужно записать в файл ", new_file, ": ", end='')
+        print("Введите номер строки для перезаписи ", new_file, ": ", end='')
         num = int(input())
         transfer_data(file, new_file, num)
         pass
